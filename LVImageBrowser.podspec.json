@@ -19,9 +19,6 @@
   "requires_arc": true,
   "source_files": "Classes/*.{h,m}",
   "dependencies": {
-    "LVUtils": [
-
-    ],
     "NSTimer-Blocks": [
 
     ],
