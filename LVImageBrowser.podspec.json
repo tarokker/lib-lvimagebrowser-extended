@@ -20,7 +20,7 @@
   "source_files": "Classes/*.{h,m}",
   "dependencies": {
     "LVUtils": [
-
+	"git": "http://gitlab.rete.farm/ios/lib-lvimagebrowser2.git"
     ],
     "NSTimer-Blocks": [
 
