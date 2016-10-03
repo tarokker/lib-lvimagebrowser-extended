@@ -1,0 +1,25 @@
+***************
+*** 43,48 ****
+      NSUInteger _currentPagingIndex;
+  }
+  
+  - (id)initWithFrame:(CGRect)frame {
+      self = [super initWithFrame:frame];
+      if (self) {
+--- 43,58 ----
+      NSUInteger _currentPagingIndex;
+  }
+  
++ - (NSMutableSet *)mGetRecycledPages
++ {
++     return self.recycledPages;
++ }
++ 
++ - (NSMutableSet *)mGetVisiblePages
++ {
++     return self.visiblePages;
++ }
++ 
+  - (id)initWithFrame:(CGRect)frame {
+      self = [super initWithFrame:frame];
+      if (self) {

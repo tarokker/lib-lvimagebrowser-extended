@@ -1,0 +1,31 @@
+***************
+*** 39,44 ****
+  
+  - (void)displayPagingViewAtIndex:(NSUInteger)index;
+  - (void)resetDisplay;
+  @end
+  
+  @protocol PZPagingScrollViewDelegate <NSObject>
+--- 39,46 ----
+  
+  - (void)displayPagingViewAtIndex:(NSUInteger)index;
+  - (void)resetDisplay;
++ - (NSMutableSet *)mGetRecycledPages;
++ - (NSMutableSet *)mGetVisiblePages;
+  @end
+  
+  @protocol PZPagingScrollViewDelegate <NSObject>
+***************
+*** 51,57 ****
+  - (void)pagingScrollView:(PZPagingScrollView *)pagingScrollView preparePageViewForDisplay:(UIView *)pageView forIndex:(NSUInteger)index;
+  - (void)pagingScrollView:(PZPagingScrollView *)pagingScrollView didScrollToIndex:(NSUInteger)index;
+  
+- - (NSMutableSet *)mGetRecycledPages;
+- - (NSMutableSet *)mGetVisiblePages;
+- 
+  @end
+--- 53,56 ----
+  - (void)pagingScrollView:(PZPagingScrollView *)pagingScrollView preparePageViewForDisplay:(UIView *)pageView forIndex:(NSUInteger)index;
+  - (void)pagingScrollView:(PZPagingScrollView *)pagingScrollView didScrollToIndex:(NSUInteger)index;
+  
+  @end

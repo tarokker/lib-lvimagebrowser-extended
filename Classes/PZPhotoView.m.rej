@@ -1,0 +1,56 @@
+***************
+*** 78,85 ****
+      [scrollViewSingleTap requireGestureRecognizerToFail:scrollViewDoubleTap];
+      [self addGestureRecognizer:scrollViewSingleTap];
+      
+-     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleScrollViewLongPress:)];
+-     [self addGestureRecognizer:longPress];
+      
+  }
+  
+--- 78,83 ----
+      [scrollViewSingleTap requireGestureRecognizerToFail:scrollViewDoubleTap];
+      [self addGestureRecognizer:scrollViewSingleTap];
+      
+      
+  }
+  
+***************
+*** 301,312 ****
+      }
+  }
+  
+- - (void)handleScrollViewLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
+-     if (self.imageView.image != nil && !showingAlert) {
+-         showingAlert = YES;
+-         [self saveImage];
+-     }
+- }
+  #pragma mark -
+  - (void)saveImage{
+      UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Save Image" message:@"Save To Photo" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save", nil];
+--- 299,304 ----
+      }
+  }
+  
+  #pragma mark -
+  - (void)saveImage{
+      UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Save Image" message:@"Save To Photo" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save", nil];
+***************
+*** 377,383 ****
+      [self updateZoomScale:newScale withCenter:center];
+  }
+  - (NSUInteger)formatFloat:(CGFloat)f{
+-     NSUInteger ff = f*100;
+      return ff;
+  }
+  - (void)updateZoomScale:(CGFloat)newScale withCenter:(CGPoint)center {
+--- 369,376 ----
+      [self updateZoomScale:newScale withCenter:center];
+  }
+  - (NSUInteger)formatFloat:(CGFloat)f{
++ //    NSUInteger ff = f*100;
++     NSUInteger ff = ( floorf(f * 10000 + 0.5) / 10000 ) *100;
+      return ff;
+  }
+  - (void)updateZoomScale:(CGFloat)newScale withCenter:(CGPoint)center {
