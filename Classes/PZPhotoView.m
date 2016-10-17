@@ -242,11 +242,10 @@
     NSUInteger scale = [self formatFloat:self.zoomScale];
     NSUInteger maxscale = [self formatFloat:self.maximumZoomScale];
     
-    if (scale== maxscale) {
+    if (scale == maxscale) {
         // jump back to minimum scale
         [self updateZoomScaleWithGesture:gestureRecognizer newScale:self.minimumZoomScale];
-    }
-    else {
+    } else {
         // double tap zooms in
         CGFloat newScale = MIN(self.zoomScale * kZoomStep, self.maximumZoomScale);
         [self updateZoomScaleWithGesture:gestureRecognizer newScale:newScale];
@@ -361,6 +360,7 @@
 
 - (void)updateZoomScale:(CGFloat)newScale {
     CGPoint center = CGPointMake(self.imageView.bounds.size.width/ 2.0, self.imageView.bounds.size.height / 2.0);
+
     [self updateZoomScale:newScale withCenter:center];
 }
 
@@ -373,9 +373,9 @@
     NSUInteger ff = ( floorf(f * 10000 + 0.5) / 10000 ) *100;
     return ff;
 }
+
 - (void)updateZoomScale:(CGFloat)newScale withCenter:(CGPoint)center {
-    
-    NSUInteger scale = [self formatFloat:newScale];
+	NSUInteger scale = [self formatFloat:newScale];
     NSUInteger maxscale = [self formatFloat:self.maximumZoomScale];
     NSUInteger minscale = [self formatFloat:self.minimumZoomScale];
 #pragma unused(maxscale)
@@ -385,7 +385,7 @@
     NSAssert(scale <= maxscale, @"Invalid State");
 
     if (self.zoomScale != newScale) {
-        CGRect zoomRect = [self zoomRectForScale:newScale withCenter:center];
+		CGRect zoomRect = [self zoomRectForScale:newScale withCenter:center];
         [self zoomToRect:zoomRect animated:YES];
     }
 }
@@ -409,7 +409,17 @@
     // choose an origin so as to get the right center.
     zoomRect.origin.x = center.x - (zoomRect.size.width / 2.0);
     zoomRect.origin.y = center.y - (zoomRect.size.height / 2.0);
-    
+
+	if (sscale > minscale) {
+		if ([self.photoViewDelegate respondsToSelector:@selector(photoViewDidZoom:)]) {
+			[self.photoViewDelegate photoViewDidZoom:self];
+		}
+	} else {
+		if ([self.photoViewDelegate respondsToSelector:@selector(photoViewDidUnzoom::)]) {
+			[self.photoViewDelegate photoViewDidUnzoom:self];
+		}
+	}
+
     return zoomRect;
 }
 
@@ -427,7 +437,7 @@
         minScale = MIN(xScale, yScale);
     }
     
-    CGFloat maxScale = minScale * (kZoomStep * 2);
+    CGFloat maxScale = minScale * (kZoomStep * 1.5);
     
     self.maximumZoomScale = maxScale;
     self.minimumZoomScale = minScale;
@@ -491,5 +501,20 @@
     return self.imageView;
 }
 
+- (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view {
+	if (scrollView.pinchGestureRecognizer.scale > 0 && scrollView.pinchGestureRecognizer.velocity > 0) {
+		[self.photoViewDelegate photoViewDidZoom:self];
+	} else {
+		return;
+	}
+}
+
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
+	if (scale < 1.3) {
+		[self.photoViewDelegate photoViewDidUnzoom:self];
+	} else {
+		//[self.photoViewDelegate photoViewDidZoom:self];
+	}
+}
 
 @end
