@@ -1,6 +1,6 @@
 {
   "name": "LVImageBrowser",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "summary": "LVImageBrowser: Image Gallery with Network + LuxuryEstate Mods",
   "description": "                       LVImageBrowser: Image Gallery with Network. By Lve\n",
   "homepage": "http://gitlab.rete.farm/ios/lib-lvimagebrowser",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "http://gitlab.rete.farm/ios/lib-lvimagebrowser-extended.git",
-    "tag": "0.0.3"
+    "tag": "0.0.4"
   },
   "social_media_url": "https://twitter.com/_SelfStudio",
   "platforms": {

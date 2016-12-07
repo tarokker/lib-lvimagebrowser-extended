@@ -510,7 +510,7 @@
 }
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
-	if (scale < 1.2) {
+	if (scale == self.minimumZoomScale) {
 		[self.photoViewDelegate photoViewDidUnzoom:self];
 	} else {
 		//[self.photoViewDelegate photoViewDidZoom:self];
