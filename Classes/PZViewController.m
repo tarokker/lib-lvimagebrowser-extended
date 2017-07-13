@@ -381,9 +381,10 @@
     UIImage *img = imgv.image;
     __weak PZViewController *weakself = self;
     __weak UIImageView *weakloader = _loader;
+    
     NSURL *ll = [NSURL URLWithString:imgv.userInfo[@"url"]];
     
-    [_loader setImageWithURL:ll placeholderImage:nil options:SDWebImageHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+    [_loader sd_setImageWithURL:ll placeholderImage:nil options:SDWebImageHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
         if (!needRefresh) {
             needRefresh = YES;
             [weakself.progressView setHidden:NO];
@@ -394,7 +395,7 @@
         }
         CGFloat f = receivedSize/(expectedSize*1.0f);
         [weakself.progressView setProgress:f];
-    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+    } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         [weakloader setImage:nil];
         @autoreleasepool {
             dispatch_async( dispatch_get_main_queue(), ^{
