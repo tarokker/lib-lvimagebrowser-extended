@@ -28,7 +28,7 @@
 //  Adjust By CodeEagle
 
 #import "PZPhotoView.h"
-#import <NSTimer+Blocks.h>
+#import "NSTimer+Blocks.h"
 #define kZoomStep 2
 
 @interface PZPhotoView () <UIScrollViewDelegate,UIAlertViewDelegate>

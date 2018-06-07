@@ -29,9 +29,9 @@
 
 #import "PZViewController.h"
 #import <CoreGraphics/CoreGraphics.h>
-#import <UIImageView+WebCache.h>
+#import "UIImageView+WebCache.h"
 #import "PZPhotoView.h"
-#import <Masonry.h>
+#import "Masonry.h"
 
 
 @interface PZViewController () <PZPagingScrollViewDelegate, PZPhotoViewDelegate, UIScrollViewDelegate>{
